@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edit Todo</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="todo.title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea  matInput [(ngModel)]="todo.description" ></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancle</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="todo" cdkFocusInitial>Ok</button>
+</div>

@@ -1,0 +1,58 @@
+<div style="height: 100%">
+  <mat-card class="example-card card-purple-shadow">
+    <mat-card-header>
+      <mat-card-title> Add Todo: </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [formControl]="addTodo.title" required />
+        <mat-error *ngIf="addTodo.title">{{
+          getErrorMessage("title")
+        }}</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [formControl]="addTodo.description"
+          required
+        ></textarea>
+        <mat-error *ngIf="addTodo.description">{{
+          getErrorMessage("description")
+        }}</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onAdd()">Add</button>
+    </mat-card-actions>
+  </mat-card>
+  <br />
+  <mat-card class="example-card card-pick-shadow" *ngFor="let todo of todos">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <mat-checkbox
+          (change)="onCheck()"
+          class="example-margin"
+          [(ngModel)]="todo.checked"
+        ></mat-checkbox>
+      </div>
+      <mat-card-title>
+        {{ todo.id }} : {{ todo.title }}</mat-card-title
+      > </mat-card-header
+    ><mat-card-content>
+      <p>
+        {{ todo.description }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="onEdit(todo)">
+        EDIT
+      </button>
+      <button mat-raised-button color="warn" (click)="onDelete(todo)">
+        DELETE
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,23 +1,37 @@
-
 <h2>My Heroes</h2>
 
-<ul class="heroes">
-  <li *ngFor="let hero of heroes"
+<!-- <ul class="heroes"> -->
+<!-- <li
+    *ngFor="let hero of heroes"
     [class.selected]="hero === selectedHero"
-    (click)="onSelect(hero)">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
-  </li>
-</ul>
+    (click)="onSelect(hero)"
+  > -->
+<div *ngFor="let hero of heroes">
+  <mat-checkbox
+    (onclick)="onSelect(hero)"
+    class="example-margin"
+    [(ngModel)]="hero.selected"
+  >
+    <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+  </mat-checkbox>
+  <br />
+</div>
 
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<!-- </li> -->
+<!-- </ul> -->
+
+<!-- <app-hero-detail [hero]="selectedHero"></app-hero-detail> -->
 
 <div *ngIf="selectedHero">
-
-    <h2>{{selectedHero.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{selectedHero.id}}</div>
-    <div>
-      <label for="hero-name">Hero name: </label>
-      <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
-    </div>
-  
+  <h2>{{ selectedHero.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{ selectedHero.id }}</div>
+  <div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name" />
   </div>
+</div>
+
+<!-- <div>
+  <label for="hero-name">Add Todo: </label>
+  <input id="hero-name" [(ngModel)]="selectedHero." placeholder="name" />
+</div> -->
