@@ -24,18 +24,25 @@
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>
-<!-- <app-heroes></app-heroes> -->
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>Auto-resizing sidenav</p>
-      <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>
+      <button
+        routerLink="/todolist"
+        routerLinkActive="active"
+        mat-raised-button
+      >
+        Todo List
       </button>
-    </mat-drawer>
-  
-    <div class="example-sidenav-content">
-      <app-todos></app-todos>
-    </div>
-  
-  </mat-drawer-container>
+    </p>
+    <p>
+      <button routerLink="/movie-shop" routerLinkActive="active" mat-raised-button>
+        Movie Shop
+      </button>
+    </p>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+    <!-- <app-todos></app-todos> -->
+  </div>
+</mat-drawer-container>

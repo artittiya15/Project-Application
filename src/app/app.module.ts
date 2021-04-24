@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // <-- NgModel lives here
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TodosComponent, TodoEditDialog } from './todos/todos.component';
@@ -17,19 +16,29 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { MovieShopComponent } from './movie-shop/movie-shop.component';
+
+
+const appRoutes: Routes = [
+  { path: '', component: TodosComponent },
+  { path: 'todolist', component: TodosComponent },
+  { path: 'movie-shop', component: MovieShopComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroesComponent,
-    HeroDetailComponent,
+
     TodosComponent,
     TodoEditDialog,
+    MovieShopComponent,
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatButtonModule,
@@ -40,7 +49,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],
