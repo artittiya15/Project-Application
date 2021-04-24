@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Set Price Movie</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input type="number" matInput [(ngModel)]="movie.price" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancle</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="movie"
+    cdkFocusInitial
+  >
+    Ok
+  </button>
+</div>

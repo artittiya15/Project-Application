@@ -10,11 +10,11 @@
     (click)="movieName = ''"
   >
     <mat-icon>close</mat-icon>
-  </button> </mat-form-field
-><button mat-raised-button color="primary" (click)="searchMovies()">
+  </button>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="searchMovies()">
   Search
 </button>
-
 <mat-grid-list cols="{{ innerWidth / 310 }}" rowHeight="450px">
   <mat-grid-tile *ngFor="let movie of movies" class="example-grid-card">
     <mat-card class="example-card card-pick-shadow">
@@ -38,11 +38,19 @@
         }}"
         alt="{{ movie.title }}"
       />
-      <mat-card-content>
-        <p>Price: {{ movie.price }}</p>
-      </mat-card-content>
+      <!-- <mat-card-content>
+          <p>
+            {{ movie.overview }}
+          </p>
+        </mat-card-content> -->
       <mat-card-actions>
-        <button mat-raised-button color="primary">BUY</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onClickSetPrice(movie)"
+        >
+          SET PRICE
+        </button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

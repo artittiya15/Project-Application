@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { GlobalVariables } from './../common/global-variables';
 
 @Component({
   selector: 'app-movie-shop',
@@ -9,22 +9,34 @@ import { Observable } from 'rxjs';
 })
 export class MovieShopComponent implements OnInit {
   movieName: string = '';
+  innerWidth: number = 1600;
   movies: Movie[] = [];
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {}
-
-  searchMovies(): void {
-    this.getMovies().subscribe((res) => {
-      this.movies = res.results;
-    });
+  constructor() {
+    this.onResize();
   }
 
-  getMovies(): Observable<MoviesSearch> {
-    return this.http.get<MoviesSearch>(
-      'https://api.themoviedb.org/3/search/movie?api_key=b303fe1a62fae1c10f73dfbafcda1849&query=' +
-        this.movieName
+  ngOnInit(): void {
+    GlobalVariables.drawer?.openedChange.subscribe((opened) => {
+      this.innerWidth = opened
+        ? window.innerWidth - (GlobalVariables.drawer?._getWidth() || 0)
+        : window.innerWidth;
+    });
+    this.movies = this.getMovies();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: any) {
+    this.innerWidth = window.innerWidth;
+  }
+
+  searchMovies(): void {
+    this.movies = this.getMovies().filter((item) =>
+      item.original_title.includes(this.movieName)
     );
+  }
+
+  getMovies(): Movie[] {
+    return JSON.parse(localStorage.getItem('movies') || '{}');
   }
 }
 
@@ -43,6 +55,7 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  price: number;
 }
 
 export interface MoviesSearch {
