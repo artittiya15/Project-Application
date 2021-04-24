@@ -11,6 +11,7 @@ export class MovieShopComponent implements OnInit {
   movieName: string = '';
   innerWidth: number = 1600;
   movies: Movie[] = [];
+  carts: Movie[] = [];
   constructor() {
     this.onResize();
   }
@@ -22,6 +23,7 @@ export class MovieShopComponent implements OnInit {
         : window.innerWidth;
     });
     this.movies = this.getMovies();
+    this.carts = JSON.parse(localStorage.getItem('carts') || '[]');
   }
 
   @HostListener('window:resize', ['$event'])
@@ -36,7 +38,19 @@ export class MovieShopComponent implements OnInit {
   }
 
   getMovies(): Movie[] {
-    return JSON.parse(localStorage.getItem('movies') || '{}');
+    return JSON.parse(localStorage.getItem('movies') || '[]');
+  }
+
+  onClickAddToCart(movie: Movie): void {
+    console.log(movie.amount);
+    const exist = this.carts.find((item) => item.id === movie.id);
+    if (exist) exist.amount += movie.amount;
+    else {
+      this.carts.push(Object.assign({}, movie));
+      GlobalVariables.totalItemInCart.emit(1);
+    }
+
+    localStorage.setItem('carts', JSON.stringify(this.carts));
   }
 }
 
@@ -56,6 +70,7 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
   price: number;
+  amount: number;
 }
 
 export interface MoviesSearch {

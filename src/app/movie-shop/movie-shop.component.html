@@ -42,7 +42,30 @@
         <p>Price: {{ movie.price }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary">BUY</button>
+        <button
+          mat-mini-fab
+          color="accent"
+          aria-label="Decreate 1"
+          (click)="movie.amount = movie.amount - 1 > 1 ? movie.amount - 1 : 1"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+        <label style="padding: 10px; font-size: 18px">{{ movie.amount }}</label>
+        <button
+          mat-mini-fab
+          color="accent"
+          aria-label="Increate 1"
+          (click)="movie.amount = movie.amount + 1"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onClickAddToCart(movie)"
+        >
+          BUY
+        </button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

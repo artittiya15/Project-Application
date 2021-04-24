@@ -23,7 +23,7 @@ export class MovieManageComponent implements OnInit {
   localMovies: Movie[] = [];
   // drawerWidthNow = GlobalVariables.drawerWidthNow;
   constructor(private http: HttpClient, public dialog: MatDialog) {
-    this.localMovies = JSON.parse(localStorage.getItem('movies') || '{}');
+    this.localMovies = JSON.parse(localStorage.getItem('movies') || '[]');
     this.onResize();
   }
 
@@ -49,8 +49,11 @@ export class MovieManageComponent implements OnInit {
       console.log('The dialog was closed');
       if (result === null || result === undefined) return;
       const exist = this.localMovies.find((item) => item.id == result.id);
-      if (exist === undefined) this.localMovies.push(result);
-      localStorage.setItem('movies', JSON.stringify(this.localMovies));
+      if (exist === undefined) {
+        result.amount = 1;
+        this.localMovies.push(result);
+        localStorage.setItem('movies', JSON.stringify(this.localMovies));
+      }
     });
   }
 
@@ -104,6 +107,7 @@ export interface Movie {
   vote_average: number;
   vote_count: number;
   price?: number;
+  amount?: number;
 }
 
 export interface MoviesSearch {

@@ -1,4 +1,5 @@
-import { MatDrawer } from "@angular/material/sidenav";
+import { EventEmitter } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 export class GlobalConstants {
   public static apiURL: string = 'https://itsolutionstuff.com/';
@@ -9,4 +10,5 @@ export class GlobalConstants {
 export class GlobalVariables {
   // public static drawerWidthNow: number = 160;
   public static drawer: MatDrawer | undefined;
+  public static totalItemInCart: any = new EventEmitter();
 }

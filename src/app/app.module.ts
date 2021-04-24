@@ -22,6 +22,7 @@ import {
   MovieSetPriceDialog,
 } from './movie-manage/movie-manage.component';
 import { MatDrawer } from '@angular/material/sidenav';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const appRoutes: Routes = [
   { path: '', component: TodosComponent },
@@ -55,14 +56,13 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     MatGridListModule,
+    MatBadgeModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
   ],
-  providers: [
-    MatDrawer
-  ],
+  providers: [MatDrawer],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
